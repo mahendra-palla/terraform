@@ -1,3 +1,11 @@
+
+
+
+# This has to write by Developers generally
+# DEVOPS guy has to prepare modules
+
+# THIS below MAIN.TF CALLS THE EC2-INSTANCE MODULE. 
+
 module "ec2-instance" {
     source = "./modules/Ec2_instance"
     ami_value = "ami-05552d2dcf89c9b24"
