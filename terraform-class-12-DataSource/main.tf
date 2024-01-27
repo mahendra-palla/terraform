@@ -1,3 +1,6 @@
+
+#Here, We are reading the already existed VPC ad Subnets in AWS and deploying our EC2 in it.
+
 resource "aws_instance" "dev-server" {
     ami = var.ec2_ami
     instance_type = var.ec2_instance_type
