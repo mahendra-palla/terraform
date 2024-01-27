@@ -2,6 +2,7 @@
 #Here, We are reading the already existed VPC ad Subnets in AWS and deploying our EC2 in it.
 
 resource "aws_instance" "dev-server" {
+    count = 2
     ami = var.ec2_ami
     instance_type = var.ec2_instance_type
     vpc_security_group_ids = ["${aws_security_group.SG-for-dev-server.id}"]
@@ -13,7 +14,7 @@ resource "aws_instance" "dev-server" {
      ]
 
     tags = {
-      Name = "Dev-server-stackorigin"
+      Name = "Dev-server-stackorigin-${count.index+1}"
     }
   
 }
