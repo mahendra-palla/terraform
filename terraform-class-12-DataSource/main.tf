@@ -2,14 +2,14 @@
 #Here, We are reading the already existed VPC ad Subnets in AWS and deploying our EC2 in it.
 
 resource "aws_instance" "dev-server" {
-    count = 2
+    count = 2   #COUNT is a meta Argument used to replicate the same type
     ami = var.ec2_ami
     instance_type = var.ec2_instance_type
     vpc_security_group_ids = ["${aws_security_group.SG-for-dev-server.id}"]
     availability_zone = "ap-south-1a"
     subnet_id = "${data.aws_subnet.stackorigin-subnet.id}"
 
-    depends_on = [
+    depends_on = [      # We used Depends on security group, it first creates SG then Ec2 instance
         aws_security_group.SG-for-dev-server
      ]
 
