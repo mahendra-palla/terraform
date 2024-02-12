@@ -1,0 +1,24 @@
+
+Explaination of  MAIN.tf  file is here 
+
+AWS IAM Role for EKS Cluster:
+This section creates an IAM (Identity and Access Management) role for your EKS cluster.
+The role allows the EKS service to assume it, which means EKS can perform certain actions using this role.
+The role is attached to a policy named "AmazonEKSClusterPolicy."
+Default VPC and Public Subnets:
+Here, we retrieve information about the default VPC and its public subnets.
+The default VPC is where your EKS cluster will be deployed.
+We identify the public subnets within the VPC.
+AWS EKS Cluster:
+This part creates the EKS cluster itself.
+It uses the IAM role created earlier and deploys the cluster in the default VPC's public subnets.
+IAM Role for EKS Node Group:
+Another IAM role is created, which is meant for the worker nodes in your EKS cluster.
+This role allows EC2 instances (worker nodes) to communicate with the EKS cluster.
+Attachment of Policies:
+Various policies, such as "AmazonEKSWorkerNodePolicy," "AmazonEKS_CNI_Policy," and "AmazonEC2ContainerRegistryReadOnly," are attached to the worker node role.
+These policies grant permissions to the worker nodes for necessary actions.
+Managed Node Group:
+The EKS node group represents the worker nodes in your cluster.
+It specifies the desired number of nodes, instance types, and other configurations.
+The group is associated with the EKS cluster, the role of worker nodes, and the public subnets. https://mrcloudbook.hashnode.dev/provisioning-aws-eks-with-terraform-a-step-by-step-guide
