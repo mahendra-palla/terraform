@@ -49,7 +49,10 @@ resource "aws_instance" "Jenkins-server" {
     Name = "Jenkins-Server"
   }
 
-  provisioner "remote-exec" {
+
+#We can also use below one
+
+ /*  provisioner "remote-exec" {
     inline = [
       "sudo cat /var/lib/jenkins/secrets/initialAdminPassword"
     ]
@@ -65,5 +68,28 @@ resource "aws_instance" "Jenkins-server" {
 
   depends_on = [
     aws_security_group.jenkins_SG
-  ]
+  ] */
+}
+
+
+
+resource "null_resource" "remote-exec" {
+    provisioner "remote-exec" {
+    inline = [
+      "sleep 2m",
+      "echo 'The initial jenkins password is:'",
+      "sudo cat /var/lib/jenkins/secrets/initialAdminPassword"
+    ]
+
+    connection {
+    type        = "ssh"
+    user        = "ec2-user"
+    private_key = file("key-Pair.pem")
+    host        = aws_instance.Jenkins-server.public_ip
+    }
+}   
+    depends_on = [ 
+    aws_instance.Jenkins-server
+    ]
+
 }
